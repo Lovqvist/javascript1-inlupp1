@@ -6,6 +6,21 @@ const output = document.querySelector('#output');
 
 let users =[];
 
+// Testar typ av data. 
+
+const validate = () => {
+    document.querySelectorAll('input').forEach(input => {
+        if(input.type === 'text') {
+            validateText(input.id)
+        } 
+
+        if(input.type === 'email') {
+            validateEmail(input.id)
+        }
+    })
+}
+
+// Kollar så att allt är korrekt ifyllt, Förnamn & Efternamn
 
 const validateText = id => {
     const input = document.querySelector('#' + id);
@@ -22,9 +37,12 @@ const validateText = id => {
     } else {
       input.classList.add('is-valid');
       input.classList.remove('is-invalid');
+      input.value.toUpperCase();
       return true;
     }
   }
+
+  // Kollar så att allt är korrekt ifyllt, Email
 
 const validateEmail = id => {
     const input = document.querySelector('#' + id);
@@ -44,27 +62,7 @@ const validateEmail = id => {
 
 }
 
-// För att smidigare få ut data
-const validate = () => {
-    document.querySelectorAll('input').forEach(input => {
-        if(input.type === 'text') {
-            validateText(input.id)
-        } 
-
-        if(input.type === 'email') {
-            validateEmail(input.id)
-        }
-    })
-}
-
-// För att nollställa registreringsformuläret
-const resetForm = () => {
-    document.querySelectorAll('input').forEach(input => {
-       input.value = '';
-       input.classList.remove('is-valid')
-    })
-}
-
+//  Skapar användaren
 
 const createUser = (firstName, lastName, email) => {
     let user = {
@@ -77,6 +75,8 @@ const createUser = (firstName, lastName, email) => {
     users.push(user);
     console.log(users)
 }
+
+// Får användaren att synas i listan över registrerade användare
 
 const renderUsers = () => {
 
@@ -99,8 +99,20 @@ const renderUsers = () => {
  })
 }
 
-// För att starta med en tom lista eller lista från en databas
+// För att nollställa registreringsformuläret efter registering
+const resetForm = () => {
+    document.querySelectorAll('input').forEach(input => {
+       input.value = '';
+       input.classList.remove('is-valid')
+    })
+}
+
+
+//Nollställer registrerade så snart du laddar om sidan
 renderUsers();
+
+
+
 
 regForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -108,11 +120,13 @@ regForm.addEventListener('submit', (e) => {
     validate();
 
     if(validateText('firstName') && validateText('lastName') && validateEmail('email')){
-        createUser(firstName.value, lastName.value, email.value)
+        createUser(firstName.value, lastName.value, email.value);
         renderUsers();
         resetForm();
     }
+   
 })
+
 
   
 
