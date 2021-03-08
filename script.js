@@ -3,6 +3,8 @@ const firstName = document.querySelector('#firstName');
 const lastName = document.querySelector('#lastName');
 const email = document.querySelector('#email');
 const output = document.querySelector('#output');
+const btnChange = document.querySelector('#btn-change');
+const btnDelete = document.querySelector('#btn-delete');
 
 let users =[];
 
@@ -48,7 +50,8 @@ const validateEmail = id => {
     const input = document.querySelector('#' + id);
     const error = input.nextElementSibling;
 
-    const regEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const regEx = 
+    /^([\w-]+(?:\.[\a-z]+)*)@((?:[\w-]+\.)*\w[a-z]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
 
    if(!regEx.test(input.value)){
         error.innerText = 'Ange giltig e-mailadress';
@@ -90,8 +93,8 @@ const renderUsers = () => {
             <small type="email">${user.email}</small>
         </div>
         <div class="buttons">
-            <button class="btn btn-primary">Ändra</button>
-            <button class="btn btn-danger">Radera</button>
+            <button id="btn-change" class="btn btn-primary">Ändra</button>
+            <button id="btn-delete" class="btn btn-danger">Radera</button>
         </div>
     </div>
     `
