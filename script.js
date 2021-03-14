@@ -60,7 +60,9 @@ const validateEmail = id => {
     } else {
         input.classList.add('is-valid');
         input.classList.remove('is-invalid');
+    
         return true;
+
     }
 
 }
@@ -87,9 +89,9 @@ const renderUsers = () => {
 
  users.forEach(user => {
      let template =`
-     <div class=" border border-1 rounded-2 user d-flex justify-content-between align-items-center mt-3 p-2">
+     <div class=" border border-1 rounded-2 user d-flex justify-content-between align-items-center mb-1 mt-1 p-2">
         <div class="text">
-            <h4 class="mb-1">${user.firstName} ${user.lastName}</h4>
+            <h4 class="mb-1">${user.firstName.charAt(0).toUpperCase() + user.firstName.slice(1)} ${user.lastName.charAt(0).toUpperCase() + user.lastName.slice(1)}</h4>
             <small type="email">${user.email}</small>
         </div>
         <div class="buttons">
